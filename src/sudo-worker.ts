@@ -52,7 +52,6 @@ export class SudoWorker {
 
   constructor(specifier: string | URL, options?: SudoWorkerOptions) {
     const runOpts = createRunOptions(options);
-    console.error(`runOpts = ${JSON.stringify(runOpts, null, 2)}`);
     this.process = Deno.run(runOpts);
   }
 
