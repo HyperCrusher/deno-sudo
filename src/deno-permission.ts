@@ -5,7 +5,7 @@ export type DenoPermission = "inherit" | "none" | StructuredPermissions;
 
 export type StructuredPermissions = {
   hrtime: boolean | "inherit" | "none";
-  plugin: boolean | "inherit" | "none";
+  ffi: boolean | "inherit" | "none";
   env: boolean | "inherit" | "none" | string[];
   net: boolean | "inherit" | "none" | string[];
   read: boolean | "inherit" | "none" | string[];
@@ -15,7 +15,7 @@ export type StructuredPermissions = {
 
 export interface ResolvedStructuredPermissions {
   hrtime: boolean;
-  plugin: boolean;
+  ffi: boolean;
   env: boolean | string[];
   net: boolean | string[];
   read: boolean | string[];
@@ -34,7 +34,7 @@ export async function getInheritedPermissions(): Promise<
 > {
   return {
     hrtime: await getInheritedPermission("hrtime"),
-    plugin: await getInheritedPermission("plugin"),
+    ffi: await getInheritedPermission("ffi"),
     env: await getInheritedPermission("env"),
     net: await getInheritedPermission("net"),
     read: await getInheritedPermission("read"),
@@ -77,7 +77,7 @@ function resolvePermissions(
 ): ResolvedStructuredPermissions {
   return {
     hrtime: resolvePermissionAsBoolean(permissions.hrtime, inherited?.hrtime),
-    plugin: resolvePermissionAsBoolean(permissions.plugin, inherited?.plugin),
+    ffi: resolvePermissionAsBoolean(permissions.ffi, inherited?.ffi),
     env: resolvePermission(permissions.env, inherited?.env),
     net: resolvePermission(permissions.net, inherited?.net),
     read: resolvePermission(permissions.read, inherited?.read),
